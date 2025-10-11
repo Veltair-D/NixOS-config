@@ -8,11 +8,6 @@ let
   };
 in
 {
-home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.veltair = {
-              {
   home.username = "veltair";
   home.homeDirectory = "/home/veltair";
   programs.git.enable = true;
@@ -95,9 +90,5 @@ home-manager = {
       source = create_symlink "${dotfiles}/${subpath}";
       recursive = true;
     })
-    configs;};
-              backupFileExtension = "backup";
-            };
-
-
-}
+    configs;
+    }

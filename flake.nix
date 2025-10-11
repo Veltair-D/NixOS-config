@@ -35,11 +35,21 @@ modules = [
           ./services.nix
           ./user.nix
           ./noctalia.nix
+home-manager.nixosModules.home-manager
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            users.veltair = import ./home.nix;
+            backupFileExtension = "backup";
+              };
+              }
+              ];
+              specialArgs = { inherit inputs system; };
+              };
+              };}
 
-        ];
-        specialArgs = { inherit inputs system; };
-      };
-      homeConfigurations.veltair = home-manager.lib.homeManagerConfiguration {
-      modules = [ ./home.nix ];};
-    };
-}
+ #     homeConfigurations.veltair = home-manager.lib.homeManagerConfiguration {
+     # modules = [ ./home.nix ];};
+   # };
+
