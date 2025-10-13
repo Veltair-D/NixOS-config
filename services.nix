@@ -51,11 +51,14 @@ pipewire = {
 
     udev.extraRules = ''
     ACTION=="add|change", SUBSYSTEM=="block", ATTR{queue/scheduler}="bfq"
+    SUBSYSTEM=="input", ATTRS{idVendor}=="310a", ATTRS{idProduct}=="310a", MODE="0660", GROUP="input"
+
   '';
 hardware.openrgb.enable = true;
 };
 
-systemd.services.flatpak-repo = {
+systemd.services = {
+flatpak-repo = {
     wantedBy = [ "multi-user.target" ];
     requires = [ "network-online.target" ];
     after = [ "network-online.target" ];
@@ -65,7 +68,20 @@ systemd.services.flatpak-repo = {
       	flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo && flatpak install -y flathub org.dupot.easyflatpak com.discordapp.Discord
     '';
   };
-
+};
+  systemd.user.services.polkit-gnome-authentication-agent-1 = {
+  description = "polkit-gnome-authentication-agent-1";
+  wantedBy = [ "graphical-session.target" ];
+  wants = [ "graphical-session.target" ];
+  after = [ "graphical-session.target" ];
+  serviceConfig = {
+    Type = "simple";
+    ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+    Restart = "on-failure";
+    RestartSec = 1;
+    TimeoutStopSec = 10;
+  };
+};
 
   hardware = {
     graphics = {
@@ -97,9 +113,27 @@ systemd.services.flatpak-repo = {
     opentabletdriver.daemon.enable = true;
     steam-hardware.enable = true;
     logitech.wireless.enable = true;
+    xone.enable = true; # support for the xbox controller USB dongle
+    xpadneo.enable = true;
 
   };
   security.rtkit.enable = true;
+  security.polkit.enable = true;
+  security.polkit.extraConfig = ''
+  polkit.addRule(function(action, subject) {
+    if ((action.id == "org.corectrl.helper.init" ||
+         action.id == "org.corectrl.helperkiller.init") &&
+        subject.local == true &&
+        subject.active == true &&
+        subject.isInGroup("users")) {
+            return polkit.Result.YES;
+    }
+});
+    polkit.addRule(function(action, subject) {
+      if (subject.isInGroup("wheel"))
+        return polkit.Result.YES;
+    });
+  '';
 #  virtualisation.virtualbox.host.enable = true;
  # virtualisation.virtualbox.guest.clipboard = true;
  # virtualisation.virtualbox.guest.enable = true;

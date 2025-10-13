@@ -1,8 +1,17 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, nixpkgs, system, ... }:
 {
 
   nixpkgs.config.permittedInsecurePackages = [
     "qtwebengine-5.15.19"
+  ];
+
+nixpkgs.overlays = [
+    (final: prev: {
+      stable = import inputs.nixpkgs-stable {
+        system = prev.system;
+        config.allowUnfree = true; # Also allow unfree packages from unstable
+        };
+    })
   ];
 
   programs = {
@@ -14,7 +23,7 @@
   gamemode.enable = true;
   gamescope = {
     enable = true;
-    capSysNice = true;
+    capSysNice = false;
   };
   steam = {
     enable = true;
@@ -66,7 +75,11 @@
     libva-utils
     ffmpeg
     ffmpegthumbnailer
-
+    xwayland-satellite
+    ntfs3g
+    cmake
+    cmakeMinimal
+    polkit_gnome
 
     # Compression
     arj
@@ -92,6 +105,7 @@
 
 
     fastfetch
+    
 
   ];
 

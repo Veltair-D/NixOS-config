@@ -6,11 +6,31 @@
 
 
     boot = {
-    loader.grub = {
-        enable = true;
-        device = "/dev/sda";
-        useOSProber = true;
-    };
+    loader = {
+  timeout = 10;
+
+  efi = {
+    efiSysMountPoint = "/boot";
+  };
+
+  grub = {
+    enable = true;
+    efiSupport = true;
+    efiInstallAsRemovable = true; # Otherwise /boot/EFI/BOOT/BOOTX64.EFI isn't generated
+    devices = ["nodev"];
+    useOSProber = true;
+    extraEntriesBeforeNixOS = false;
+    extraEntries = ''
+      menuentry "Reboot" {
+        reboot
+      }
+      menuentry "Poweroff" {
+        halt
+      }
+    '';
+  };
+};
+#    };
     kernelPackages = pkgs.linuxPackages_zen;
     tmp.cleanOnBoot = true;
     kernelParams =
@@ -30,6 +50,7 @@
       "kernel.kptr_restrict" = 2;
       "kernel.kexec_load_disabled" = 1;
     };
+    supportedFilesystems = [ "ntfs" ];
   };
   networking = {
   hostName = "nixos";

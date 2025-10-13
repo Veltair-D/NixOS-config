@@ -1,10 +1,13 @@
 { config, pkgs, ... }:
 
 let
-  dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/config";
+  dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/configs";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
   configs = {
-    #nvim = "nvim";
+    nvim = "nvim";
+    niri = "niri";
+    noctalia = "noctalia";
+    ghostty = "ghostty";
   };
 in
 {
@@ -27,11 +30,10 @@ in
     gcc
     fastfetch
     protonup-qt
-    bottles
     heroic
     osu-lazer-bin
     chromium
-    #virtualbox
+    stable.virtualbox
     solaar
     neovide
     anki
@@ -47,15 +49,20 @@ in
     goverlay
     mangohud
     libreoffice-fresh
-    #mgba
+    stable.mgba
     obs-studio
     opentabletdriver
     spotify
-    #stremio
+    stable.stremio
     upscayl
     zoom-us
     wl-clipboard
     kdePackages.kate
+    swayidle
+nautilus
+localsend
+syncthing
+stable.gamescope
 
 
     #gaming
@@ -65,6 +72,7 @@ in
     openrgb-with-all-plugins
 
   ];
+
 
   programs.mangohud = {
     enable = true;

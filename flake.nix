@@ -2,6 +2,7 @@
   description = "NixOS from Scratch";
 
   inputs = {
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
     nixpkgs.url = "nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -21,13 +22,13 @@
   outputs = inputs@{ self, nixpkgs, home-manager, ... }:
   let
   system = "x86_64-linux";
-  pkgs = nixpkgs.legacyPackages.${system};
-  in
+    in
     {
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+       specialArgs = { inherit inputs; };
 system = system;
 modules = [
-          ./configuration.nix
+          ./8bitdo.nix
           ./hardware-configuration.nix
           ./nix.nix
           ./packages.nix
@@ -45,7 +46,7 @@ home-manager.nixosModules.home-manager
               };
               }
               ];
-              specialArgs = { inherit inputs system; };
+#              specialArgs = { inherit inputs system; };
               };
               };}
 
