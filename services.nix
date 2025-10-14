@@ -53,6 +53,7 @@ pipewire = {
     ACTION=="add|change", SUBSYSTEM=="block", ATTR{queue/scheduler}="bfq"
     SUBSYSTEM=="input", ATTRS{idVendor}=="310a", ATTRS{idProduct}=="310a", MODE="0660", GROUP="input"
 
+SUBSYSTEM=="input", ATTRS{idVendor}=="55d4", ATTRS{idProduct}=="0461", ENV{ID_INPUT_JOYSTICK}=""                                                                                                 
   '';
 hardware.openrgb.enable = true;
 };
@@ -134,6 +135,8 @@ flatpak-repo = {
         return polkit.Result.YES;
     });
   '';
+
+
 #  virtualisation.virtualbox.host.enable = true;
  # virtualisation.virtualbox.guest.clipboard = true;
  # virtualisation.virtualbox.guest.enable = true;
