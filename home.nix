@@ -63,6 +63,7 @@ nautilus
 localsend
 syncthing
 stable.gamescope
+lazygit
 
 
     #gaming

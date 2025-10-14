@@ -80,6 +80,7 @@ nixpkgs.overlays = [
     cmake
     cmakeMinimal
     polkit_gnome
+    gh
 
     # Compression
     arj
