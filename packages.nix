@@ -5,60 +5,60 @@
     "qtwebengine-5.15.19"
   ];
 
-nixpkgs.overlays = [
+  nixpkgs.overlays = [
     (final: prev: {
       stable = import inputs.nixpkgs-stable {
         system = prev.system;
         config.allowUnfree = true; # Also allow unfree packages from unstable
-        };
+      };
     })
   ];
 
   programs = {
-  niri.enable = true;
-  firefox.enable = true;
-  corectrl.enable = true;
-  obs-studio.enable = true;
-  zoom-us.enable = true;
-  gamemode.enable = true;
-  gamescope = {
-    enable = true;
-    capSysNice = false;
-  };
-  steam = {
-    enable = true;
-    gamescopeSession.enable = true;
-    package = pkgs.steam.override {
-      extraEnv = {
-        OBS_VKCAPTURE = true;
-      };
-      extraPkgs = pkgs': with pkgs'; [
-        xorg.libXcursor
-        xorg.libXi
-        xorg.libXinerama
-        xorg.libXScrnSaver
-        libpng
-        libpulseaudio
-        libvorbis
-        stdenv.cc.cc.lib
-        libkrb5
-        keyutils
-      ];
+    niri.enable = true;
+    firefox.enable = true;
+    corectrl.enable = true;
+    obs-studio.enable = true;
+    zoom-us.enable = true;
+    gamemode.enable = true;
+    gamescope = {
+      enable = true;
+      capSysNice = false;
     };
-    remotePlay.openFirewall = true;
-    dedicatedServer.openFirewall = true;
-    localNetworkGameTransfers.openFirewall = true;
-    extraCompatPackages = with pkgs; [ proton-ge-bin ];
-  };
-  appimage = {
-    enable = true;
-    binfmt = true;
-  };
-  nix-ld.enable = true;
+    steam = {
+      enable = true;
+      gamescopeSession.enable = true;
+      package = pkgs.steam.override {
+        extraEnv = {
+          OBS_VKCAPTURE = true;
+        };
+        extraPkgs = pkgs': with pkgs'; [
+          xorg.libXcursor
+          xorg.libXi
+          xorg.libXinerama
+          xorg.libXScrnSaver
+          libpng
+          libpulseaudio
+          libvorbis
+          stdenv.cc.cc.lib
+          libkrb5
+          keyutils
+        ];
+      };
+      remotePlay.openFirewall = true;
+      dedicatedServer.openFirewall = true;
+      localNetworkGameTransfers.openFirewall = true;
+      extraCompatPackages = with pkgs; [ proton-ge-bin ];
+    };
+    appimage = {
+      enable = true;
+      binfmt = true;
+    };
+    nix-ld.enable = true;
 
   };
 
-    fonts.packages = with pkgs; [
+  fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
   ];
 
@@ -81,6 +81,7 @@ nixpkgs.overlays = [
     cmakeMinimal
     polkit_gnome
     gh
+    killall
 
     # Compression
     arj
@@ -106,7 +107,7 @@ nixpkgs.overlays = [
 
 
     fastfetch
-    
+
 
   ];
 
@@ -114,4 +115,4 @@ nixpkgs.overlays = [
 
 
 
-  }
+}

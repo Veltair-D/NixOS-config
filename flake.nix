@@ -20,14 +20,14 @@
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, ... }:
-  let
-  system = "x86_64-linux";
+    let
+      system = "x86_64-linux";
     in
     {
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-       specialArgs = { inherit inputs; };
-system = system;
-modules = [
+        specialArgs = { inherit inputs; };
+        system = system;
+        modules = [
           ./8bitdo.nix
           ./hardware-configuration.nix
           ./nix.nix
@@ -36,21 +36,22 @@ modules = [
           ./services.nix
           ./user.nix
           ./noctalia.nix
-home-manager.nixosModules.home-manager
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            users.veltair = import ./home.nix;
-            backupFileExtension = "backup";
-              };
-              }
-              ];
-#              specialArgs = { inherit inputs system; };
-              };
-              };}
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.veltair = import ./home.nix;
+              backupFileExtension = "backup";
+            };
+          }
+        ];
+        #              specialArgs = { inherit inputs system; };
+      };
+    };
+}
 
- #     homeConfigurations.veltair = home-manager.lib.homeManagerConfiguration {
-     # modules = [ ./home.nix ];};
-   # };
+#     homeConfigurations.veltair = home-manager.lib.homeManagerConfiguration {
+# modules = [ ./home.nix ];};
+# };
 

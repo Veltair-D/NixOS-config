@@ -5,7 +5,8 @@ let
   # Discoverable using lsusb. You will find 2dc8:310a.
   vendorId = "2dc8";
   productId = "310a";
-in {
+in
+{
   options.custom.hardware.gamepad-8bitdo-ultimate2c = {
     enable = lib.mkEnableOption "8bitdo 2.4 Ultimate 2C Controller support";
   };
@@ -14,7 +15,7 @@ in {
   # - X -> Xinput (displays as Xbox Controller)
   # - D -> DInput (displays as 8Bitdo Ultimate 2C Wireless)
   config = lib.mkIf cfg.enable {
-    hardware.xpadneo.enable = true;   # Wireless Xbox(ish) gamepads (e.g., 8bitdo)
+    hardware.xpadneo.enable = true; # Wireless Xbox(ish) gamepads (e.g., 8bitdo)
 
     services.udev.extraRules = ''
       ACTION=="add", \

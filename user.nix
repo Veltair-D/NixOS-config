@@ -1,14 +1,14 @@
 { pkgs, inputs, ... }:
 
 {
-#imports = [
-#inputs.home-manager.nixosModules.home-manager
-#];
-#home-manager = {
-#              useGlobalPkgs = true;
-#              useUserPackages = true;
- #             users.veltair = import ./home.nix;
- #             backupFileExtension = "backup";
+  #imports = [
+  #inputs.home-manager.nixosModules.home-manager
+  #];
+  #home-manager = {
+  #              useGlobalPkgs = true;
+  #              useUserPackages = true;
+  #             users.veltair = import ./home.nix;
+  #             backupFileExtension = "backup";
   #          };
   users.users.veltair = {
     isNormalUser = true;

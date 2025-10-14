@@ -59,11 +59,11 @@ in
     wl-clipboard
     kdePackages.kate
     swayidle
-nautilus
-localsend
-syncthing
-stable.gamescope
-lazygit
+    nautilus
+    localsend
+    syncthing
+    stable.gamescope
+    lazygit
 
 
     #gaming
@@ -100,4 +100,4 @@ lazygit
       recursive = true;
     })
     configs;
-    }
+}

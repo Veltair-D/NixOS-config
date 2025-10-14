@@ -2,35 +2,35 @@
 
 {
 
-#host
+  #host
 
 
-    boot = {
+  boot = {
     loader = {
-  timeout = 10;
+      timeout = 10;
 
-  efi = {
-    efiSysMountPoint = "/boot";
-  };
+      efi = {
+        efiSysMountPoint = "/boot";
+      };
 
-  grub = {
-    enable = true;
-    efiSupport = true;
-    efiInstallAsRemovable = true; # Otherwise /boot/EFI/BOOT/BOOTX64.EFI isn't generated
-    devices = ["nodev"];
-    useOSProber = true;
-    extraEntriesBeforeNixOS = false;
-    extraEntries = ''
-      menuentry "Reboot" {
-        reboot
-      }
-      menuentry "Poweroff" {
-        halt
-      }
-    '';
-  };
-};
-#    };
+      grub = {
+        enable = true;
+        efiSupport = true;
+        efiInstallAsRemovable = true; # Otherwise /boot/EFI/BOOT/BOOTX64.EFI isn't generated
+        devices = [ "nodev" ];
+        useOSProber = true;
+        extraEntriesBeforeNixOS = false;
+        extraEntries = ''
+          menuentry "Reboot" {
+            reboot
+          }
+          menuentry "Poweroff" {
+            halt
+          }
+        '';
+      };
+    };
+    #    };
     kernelPackages = pkgs.linuxPackages_zen;
     tmp.cleanOnBoot = true;
     kernelParams =
@@ -53,16 +53,17 @@
     supportedFilesystems = [ "ntfs" ];
   };
   networking = {
-  hostName = "nixos";
-  networkmanager.enable = true;};
+    hostName = "nixos";
+    networkmanager.enable = true;
+  };
 
   time.timeZone = "America/Lima";
 
-    i18n.defaultLocale = "en_US.UTF-8";
-environment.sessionVariables = {
+  i18n.defaultLocale = "en_US.UTF-8";
+  environment.sessionVariables = {
     STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
-    };
-      zramSwap = {
+  };
+  zramSwap = {
     enable = true;
     algorithm = "zstd";
     memoryPercent = 25;
@@ -80,6 +81,6 @@ environment.sessionVariables = {
   };
   system.stateVersion = "25.05";
 
-    console.keyMap = "us";
+  console.keyMap = "us";
 
 }
