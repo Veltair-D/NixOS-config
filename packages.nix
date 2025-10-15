@@ -82,6 +82,9 @@
     polkit_gnome
     gh
     killall
+    rose-pine-kvantum
+    libsForQt5.qtstyleplugin-kvantum
+    libsForQt5.qt5ct
 
     # Compression
     arj
@@ -108,10 +111,18 @@
 
     fastfetch
 
-
+    #Neovim required packages 
+    luajitPackages.luarocks
+    lua51Packages.lua
+    tree-sitter
+    lua-language-server
+    fd
   ];
 
+  stylix.enable = true;
 
+
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/rose-pine.yaml";
 
 
 
