@@ -62,6 +62,7 @@
   i18n.defaultLocale = "en_US.UTF-8";
   environment.sessionVariables = {
     STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
+    DISPLAY = ":0";
   };
   zramSwap = {
     enable = true;

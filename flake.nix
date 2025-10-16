@@ -40,7 +40,6 @@
           ./services.nix
           ./user.nix
           ./noctalia.nix
-          stylix.nixosModules.stylix
           home-manager.nixosModules.home-manager
           {
             home-manager = {

@@ -13,8 +13,7 @@
       };
     };
 
-    displayManager.sddm.enable = true;
-    desktopManager.plasma6.enable = true;
+    displayManager.ly.enable = true;
 
     printing.enable = true;
 

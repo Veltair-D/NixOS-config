@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, inputs, ... }:
 
 let
   dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/configs";
@@ -102,4 +102,6 @@ in
         recursive = true;
       })
       configs;
+
+
 }

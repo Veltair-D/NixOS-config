@@ -1,6 +1,10 @@
 { config, pkgs, inputs, nixpkgs, system, ... }:
 {
 
+  imports = [
+    inputs.stylix.nixosModules.stylix
+  ];
+
   nixpkgs.config.permittedInsecurePackages = [
     "qtwebengine-5.15.19"
   ];
@@ -20,6 +24,7 @@
     corectrl.enable = true;
     obs-studio.enable = true;
     zoom-us.enable = true;
+    xwayland.enable = true;
     gamemode.enable = true;
     gamescope = {
       enable = true;
@@ -82,9 +87,6 @@
     polkit_gnome
     gh
     killall
-    rose-pine-kvantum
-    libsForQt5.qtstyleplugin-kvantum
-    libsForQt5.qt5ct
 
     # Compression
     arj
@@ -123,7 +125,6 @@
 
 
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/rose-pine.yaml";
-
 
 
 }
