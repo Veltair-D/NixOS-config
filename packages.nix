@@ -87,6 +87,15 @@
     polkit_gnome
     gh
     killall
+    libsForQt5.qt5.qtimageformats
+    kdePackages.okular
+    kdePackages.dolphin
+    kdePackages.spectacle
+    libsForQt5.qt5.qtsvg
+    libjpeg
+    imv
+    bign-handheld-thumbnailer
+
 
     # Compression
     arj

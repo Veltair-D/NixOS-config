@@ -43,7 +43,11 @@
           };
         };
       };
+
+
     };
+    gvfs.enable = true;
+    tumbler.enable = true;
 
     flatpak.enable = true;
 
