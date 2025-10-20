@@ -85,6 +85,8 @@
     cmake
     cmakeMinimal
     polkit_gnome
+    polkit
+    libsForQt5.polkit-qt
     gh
     killall
     libsForQt5.qt5.qtimageformats
@@ -96,7 +98,21 @@
     imv
     bign-handheld-thumbnailer
     feh
-
+    webp-pixbuf-loader
+    papirus-icon-theme
+    kdePackages.breeze-icons
+    rose-pine-cursor
+    rose-pine-icon-theme
+    libsForQt5.qtstyleplugins
+    kdePackages.breeze
+    gtk2
+    xfce.thunar
+    rose-pine-kvantum
+    libsForQt5.qtstyleplugin-kvantum
+    libsForQt5.qt5ct
+    kdePackages.qt6ct
+    gparted
+    nh
 
     # Compression
     arj
@@ -131,10 +147,12 @@
     fd
   ];
 
-  #stylix.enable = true;
+  stylix.enable = true;
 
 
-  #stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/rose-pine.yaml";
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/rose-pine.yaml";
+  stylix.autoEnable = false;
+  stylix.targets.chromium.enable = true;
 
 
 }

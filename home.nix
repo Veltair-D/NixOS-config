@@ -64,8 +64,8 @@ in
     syncthing
     stable.gamescope
     lazygit
-
-
+    bat
+    fzf
     #gaming
     glxinfo
     joystickwake
@@ -102,6 +102,66 @@ in
         recursive = true;
       })
       configs;
+
+  xdg.desktopEntries = {
+    osu-gamescope = {
+      name = "osu! Gamescope";
+      genericName = "osu!";
+      exec = "steam-run gamemoderun gamescope -h 1080 -w 1920 -b -r 144 -- osu! %U";
+      terminal = false;
+      categories = [ "Game" ];
+      #mimeType = [ "text/html" "text/xml" ];
+    };
+  };
+  gtk = {
+    enable = true;
+    theme = {
+      package = pkgs.rose-pine-gtk-theme;
+      name = "rose-pine";
+    };
+    iconTheme = {
+      package = pkgs.rose-pine-icon-theme;
+      name = "rose-pine";
+    };
+    gtk2 = {
+      enable = true;
+      cursorTheme = {
+        package = pkgs.rose-pine-cursor;
+        name = "BreezeX-RosePine-Linux";
+        size = 30;
+      };
+      iconTheme = {
+        package = pkgs.rose-pine-icon-theme;
+        name = "rose-pine";
+      };
+    };
+  };
+  qt = {
+    enable = true;
+    platformTheme.name = "gtk2";
+    style = {
+      package = pkgs.libsForQt5.qtstyleplugins;
+      name = "gtk2";
+    };
+  };
+  home.pointerCursor = {
+    enable = true;
+    name = "BreezeX-RosePine-Linux";
+    package = pkgs.rose-pine-cursor;
+    size = 30;
+    x11.enable = true;
+  };
+
+  stylix.targets.bat.enable = true;
+  stylix.targets.btop.enable = true;
+  #stylix.targets.vesktop.enable
+  #stylix.targets.vencord.enable
+  #stylix.targets.vencord.extraCss
+  stylix.targets.fzf.enable = true;
+  stylix.targets.nixos-icons.enable = true;
+  #stylix.targets.spicetify.enable
+  #stylix.targets.starship.enable
+  #stylix.targets.zed.enable
 
 
 }

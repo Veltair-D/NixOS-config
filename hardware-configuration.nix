@@ -16,43 +16,43 @@
 
   fileSystems."/" =
     {
-      device = "/dev/disk/by-uuid/4105cf4a-aab6-458a-b44a-42f523c25de1";
+      device = "/dev/disk/by-uuid/c611fbef-259c-4ca0-b2dc-7399431426a2";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
     {
-      device = "/dev/disk/by-uuid/3317-A9F0";
+      device = "/dev/disk/by-uuid/4925-E88D";
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };
-  fileSystems."/media/games_1" =
-    {
-      device = "/dev/disk/by-uuid/7AC49DD8C49D96CB";
-      fsType = "ntfs-3g";
-      options = [ "uid=1000" "gid=100" "rw" "dmask=007" "fmask=007" "big_writes" ];
-    };
-  fileSystems."/media/games_2" =
-    {
-      device = "/dev/disk/by-uuid/A21E31FE1E31CBD3";
-      fsType = "ntfs-3g";
-      options = [ "gid=100" "uid=1000" "rw" ];
-    };
-  fileSystems."/media/games_3" =
-    {
-      device = "/dev/disk/by-uuid/EA9A490C9A48D72B";
-      fsType = "ntfs-3g";
-      options = [ "gid=100" "uid=1000" "rw" ];
-    };
-  fileSystems."/media/CachyOS" =
-    {
-      device = "/dev/disk/by-uuid/8cf2a9f8-b0d7-4d2d-ab87-b28f930e7e25";
-      fsType = "btrfs";
-      options = [ "subvol=/" "rw" ];
-    };
 
-  swapDevices =
-    [{ device = "/dev/disk/by-uuid/f4d6dacb-79b5-4a3f-93f9-bc6ac9de32fd"; }];
+  fileSystems."/media/games-1" =
+    {
+      device = "/dev/disk/by-uuid/51053240-8eb4-490c-a5d2-61fc2e9b0ad8";
+      fsType = "ext4";
+    };
+  fileSystems."/media/games-2" =
+    {
+      device = "/dev/disk/by-uuid/442572cb-ec14-417b-a8e0-10bd0e102777";
+      fsType = "ext4";
+    };
+  fileSystems."/media/games-3" =
+    {
+      device = "/dev/disk/by-uuid/683804b7-dd71-4b35-b21b-82236f2ee615";
+      fsType = "ext4";
+    };
+  fileSystems."/media/games-4" =
+    {
+      device = "/dev/disk/by-uuid/f997ae01-6689-482f-9543-621fef8c026f";
+      fsType = "ext4";
+    };
+  # fileSystems."/media/CachyOS" =
+  #   {
+  #     device = "/dev/";
+  #     fsType = "btrfs";
+  #   };
+  swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
