@@ -60,6 +60,10 @@
       binfmt = true;
     };
     nix-ld.enable = true;
+    nh = {
+      enable = true;
+      flake = "/home/veltair/nixos-dotfiles/"; #path to config dir
+    };
 
   };
 
@@ -113,6 +117,7 @@
     kdePackages.qt6ct
     gparted
     nh
+    gamescope
 
     # Compression
     arj

@@ -11,6 +11,11 @@ let
   };
 in
 {
+
+  imports = [
+    inputs.zen-browser.homeModules.beta
+  ];
+
   home.username = "veltair";
   home.homeDirectory = "/home/veltair";
   programs.git.enable = true;
@@ -62,7 +67,6 @@ in
     nautilus
     localsend
     syncthing
-    stable.gamescope
     lazygit
     bat
     fzf
@@ -73,7 +77,7 @@ in
     openrgb-with-all-plugins
 
   ];
-
+  programs.zen-browser.enable = true;
 
   programs.mangohud = {
     enable = true;

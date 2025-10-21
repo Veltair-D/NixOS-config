@@ -53,11 +53,16 @@
 
 
     udev.extraRules = ''
-          ACTION=="add|change", SUBSYSTEM=="block", ATTR{queue/scheduler}="bfq"
-          SUBSYSTEM=="input", ATTRS{idVendor}=="310a", ATTRS{idProduct}=="310a", MODE="0660", GROUP="input"
+                ACTION=="add|change", SUBSYSTEM=="block", ATTR{queue/scheduler}="bfq"
+                SUBSYSTEM=="input", ATTRS{idVendor}=="310a", ATTRS{idProduct}=="310a", MODE="0660", GROUP="input"
 
-      SUBSYSTEM=="input", ATTRS{idVendor}=="55d4", ATTRS{idProduct}=="0461", ENV{ID_INPUT_JOYSTICK}=""                                                                                                 
+            SUBSYSTEM=="input", ATTRS{idVendor}=="55d4", ATTRS{idProduct}=="0461", ENV{ID_INPUT_JOYSTICK}=""   
+
+
+      KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{serial}=="*vial:f64c2b3c*", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
     '';
+
+
     hardware.openrgb.enable = true;
   };
 
