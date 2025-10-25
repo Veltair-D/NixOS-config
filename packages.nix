@@ -19,6 +19,7 @@
   ];
 
   programs = {
+    fish.enable = true;
     niri.enable = true;
     firefox.enable = true;
     corectrl.enable = true;

@@ -51,6 +51,9 @@
               useUserPackages = true;
               users.veltair = import ./home.nix;
               backupFileExtension = "backup";
+              overwriteBackup = true;
+              extraSpecialArgs = { inherit inputs; };
+
             };
           }
         ];

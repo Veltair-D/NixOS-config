@@ -20,12 +20,43 @@ in
   home.homeDirectory = "/home/veltair";
   programs.git.enable = true;
   home.stateVersion = "25.05";
-  programs.bash = {
+  programs.fish = {
     enable = true;
+    interactiveShellInit = ''
+      set fish_greeting # Disable greeting
+      fish_config prompt choose arrow
+    '';
+    shellInit = ''
+      fastfetch --logo ~/Pictures/nixos.png --logo-height 20 --logo-width 40
+    '';
     shellAliases = {
-      btw = "echo i use nixos, btw";
+      fetch = "fastfetch --logo ~/Pictures/nixos.png --logo-height 20 --logo-width 40";
+      ".." = "cd ..";
+      "..." = "cd ../..";
+      gst = "git status";
+      ga = "git add";
+      gaa = "git add *";
+      gc = "git commit";
+      gcm = "git commit -m";
+      gp = "git push";
+      lg = "lazygit";
+      nv = "nvim";
     };
+    plugins = [
+      # Enable a plugin (here grc for colorized command output) from nixpkgs
+      { name = "grc"; src = pkgs.fishPlugins.grc.src; }
+    ];
   };
+  programs.ghostty.enableFishIntegration = true;
+  programs.eza.enable = true;
+  programs.eza.colors = "always";
+  programs.eza.icons = "always";
+  programs.eza.enableFishIntegration = true;
+  programs.fzf.enable = true;
+  programs.fzf.enableFishIntegration = true;
+  programs.starship.enable = true;
+  programs.starship.enableFishIntegration = true;
+  programs.starship.enableTransience = true;
   home.packages = with pkgs; [
     neovim
     ripgrep
@@ -69,15 +100,28 @@ in
     syncthing
     lazygit
     bat
-    fzf
     #gaming
     glxinfo
     joystickwake
     winetricks
     openrgb-with-all-plugins
+    etterna
+
+    fishPlugins.grc
+    grc
+    eza
+    fzf
+    starship
 
   ];
-  programs.zen-browser.enable = true;
+  programs.zen-browser = {
+    enable = true;
+    #  profiles = {
+    #   profile = {
+    # bookmarks, extensions, search engines...
+    #  };
+    #};
+  };
 
   programs.mangohud = {
     enable = true;
@@ -166,6 +210,8 @@ in
   #stylix.targets.spicetify.enable
   #stylix.targets.starship.enable
   #stylix.targets.zed.enable
+  #stylix.targets.zen-browser.enable = true;
+  #stylix.targets.zen-browser.profileNames = [ "profile" ];
 
 
 }
