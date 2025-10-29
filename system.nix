@@ -30,11 +30,24 @@
         '';
       };
     };
-    #    };
+
+    plymouth = {
+      enable = true;
+    };
+    consoleLogLevel = 3;
+    initrd.verbose = false;
     kernelPackages = pkgs.linuxPackages_xanmod_latest;
     tmp.cleanOnBoot = true;
     kernelParams =
-      if builtins.elem "kvm-amd" config.boot.kernelModules then [ "amd_pstate=active" "nosplit_lock_mitigate" "clearcpuid=514" ] else [ "nosplit_lock_mitigate" ];
+      if builtins.elem "kvm-amd" config.boot.kernelModules then [ "amd_pstate=active" "nosplit_lock_mitigate" "clearcpuid=514" ] else
+      [ "nosplit_lock_mitigate" ]
+        [
+          "quiet"
+          "splash"
+          "boot.shell_on_fail"
+          "udev.log_priority=3"
+          "rd.systemd.show_status=auto"
+        ];
 
     kernel.sysctl = {
       "kernel.split_lock_mitigate" = 0;
@@ -55,6 +68,7 @@
   networking = {
     hostName = "nixos";
     networkmanager.enable = true;
+    nameservers = ["192.168.1.35"];
   };
 
   time.timeZone = "America/Lima";

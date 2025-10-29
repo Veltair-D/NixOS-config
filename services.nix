@@ -64,6 +64,7 @@
 
 
     hardware.openrgb.enable = true;
+    resolved.enable = true;
   };
 
   systemd.services = {

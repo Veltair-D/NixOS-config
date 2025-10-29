@@ -160,6 +160,16 @@ in
       categories = [ "Game" ];
       #mimeType = [ "text/html" "text/xml" ];
     };
+    citron = {
+      name = "Citron";
+      genericName = "Citron";
+      exec = "/home/veltair/Downloads/citron_0.8.0-x86_64.AppImage %U";
+      terminal = false;
+      categories = [ "Game" ];
+      icon = "/home/veltair/Downloads/25f6ab48f6e60b601deb89e52ecabe18.png";
+      #mimeType = [ "text/html" "text/xml" ];
+    };
+
   };
   gtk = {
     enable = true;

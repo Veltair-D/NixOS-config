@@ -57,8 +57,8 @@
       extraCompatPackages = with pkgs; [ proton-ge-bin ];
     };
     appimage = {
-      enable = true;
-      binfmt = true;
+      enable = false;
+      binfmt = false;
     };
     nix-ld.enable = true;
     nh = {
