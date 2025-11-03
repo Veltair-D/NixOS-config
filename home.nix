@@ -138,8 +138,8 @@ in
 
 
   programs.git = {
-    userName = "Fabian Quevedo";
-    userEmail = "fabian.quevedo@upch.pe";
+    settings.user.name = "Fabian Quevedo";
+    settings.user.email = "fabian.quevedo@upch.pe";
   };
 
   xdg.configFile =
