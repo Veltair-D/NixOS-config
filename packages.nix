@@ -15,13 +15,20 @@
         system = prev.system;
         config.allowUnfree = true; # Also allow unfree packages from unstable
       };
+      nixpkgs-unstable = import inputs.nixpkgs-unstable {
+        system = prev.system;
+        config.allowUnfree = true;
+    };
     })
   ];
 
   programs = {
     fish.enable = true;
     niri.enable = true;
-    firefox.enable = true;
+    firefox = {
+      enable = true;
+      preferences."media.eme.enabled" = true;
+    };
     corectrl.enable = true;
     obs-studio.enable = true;
     zoom-us.enable = true;
@@ -34,6 +41,7 @@
     steam = {
       enable = true;
       gamescopeSession.enable = true;
+      protontricks.enable = true;
       package = pkgs.steam.override {
         extraEnv = {
           OBS_VKCAPTURE = true;
@@ -111,7 +119,6 @@
     libsForQt5.qtstyleplugins
     kdePackages.breeze
     gtk2
-    xfce.thunar
     rose-pine-kvantum
     libsForQt5.qtstyleplugin-kvantum
     libsForQt5.qt5ct
@@ -119,6 +126,7 @@
     gparted
     nh
     gamescope
+    wineWowPackages.stable
 
     # Compression
     arj
@@ -152,6 +160,13 @@
     lua-language-server
     fd
   ];
+
+  programs.thunar = {
+      enable = true;
+      plugins = with pkgs.xfce; [
+        thunar-archive-plugin 
+        thunar-volman ];
+    };
 
   stylix.enable = true;
 

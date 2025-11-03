@@ -65,6 +65,8 @@
 
     hardware.openrgb.enable = true;
     resolved.enable = true;
+
+    speechd.enable = true;
   };
 
   systemd.services = {
@@ -98,10 +100,10 @@
       enable = true;
       enable32Bit = true;
       extraPackages = with pkgs; [
-        intel-gpu-tools
-        intel-media-driver
-        vaapiIntel
-        vaapiVdpau
+        #intel-gpu-tools
+        #intel-media-driver
+        #vaapiIntel
+        #vaapiVdpau
         #libvdpau-va-gl
         libva
         vulkan-loader
@@ -109,10 +111,10 @@
         mesa
       ];
       extraPackages32 = with pkgs; [
-        intel-gpu-tools
-        intel-media-driver
-        vaapiIntel
-        vaapiVdpau
+        #intel-gpu-tools
+        #intel-media-driver
+        #vaapiIntel
+        #vaapiVdpau
         #libvdpau-va-gl
         libva
         pkgsi686Linux.mesa

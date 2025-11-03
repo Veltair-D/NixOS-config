@@ -67,7 +67,7 @@ in
     fastfetch
     protonup-qt
     heroic
-    osu-lazer-bin
+    nixpkgs-unstable.osu-lazer-bin
     chromium
     stable.virtualbox
     solaar
@@ -101,7 +101,7 @@ in
     lazygit
     bat
     #gaming
-    glxinfo
+    mesa-demos
     joystickwake
     winetricks
     openrgb-with-all-plugins
