@@ -5,6 +5,12 @@
 }: {
   #host
 
+  system.stateVersion = "25.05";
+
+  time.timeZone = "America/Lima";
+  i18n.defaultLocale = "en_US.UTF-8";
+  console.keyMap = "us";
+
   boot = {
     loader = {
       timeout = 10;
@@ -37,12 +43,13 @@
     consoleLogLevel = 3;
     initrd.verbose = false;
     kernelPackages = pkgs.linuxPackages_xanmod_latest;
+    supportedFilesystems = ["ntfs"];
     tmp.cleanOnBoot = true;
     kernelParams =
       if builtins.elem "kvm-amd" config.boot.kernelModules
       then ["amd_pstate=active" "nosplit_lock_mitigate" "clearcpuid=514"]
       else
-        ["nosplit_lock_mitigate"]
+        ["nosplit_lock_mitigate" "quiet" "splash"]
         [
           "quiet"
           "splash"
@@ -65,7 +72,6 @@
       "kernel.kptr_restrict" = 2;
       "kernel.kexec_load_disabled" = 1;
     };
-    supportedFilesystems = ["ntfs"];
   };
   networking = {
     hostName = "nixos";
@@ -73,9 +79,6 @@
     nameservers = ["192.168.1.35"];
   };
 
-  time.timeZone = "America/Lima";
-
-  i18n.defaultLocale = "en_US.UTF-8";
   environment.sessionVariables = {
     STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
     DISPLAY = ":0";
@@ -86,16 +89,6 @@
     memoryPercent = 25;
     priority = 5;
   };
-
-  system.activationScripts."vlc-link" = {
-    text = ''
-      ln -sf ${pkgs.vlc}/bin/vlc /usr/bin/vlc
-    '';
-  };
-
-  system.stateVersion = "25.05";
-
-  console.keyMap = "us";
 
   services = {
     printing.enable = true;

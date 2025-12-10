@@ -1,6 +1,10 @@
-{ config, pkgs, lib, inputs, ... }:
-
-let
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: let
   dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/configs";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
   configs = {
@@ -9,160 +13,155 @@ let
     noctalia = "noctalia";
     ghostty = "ghostty";
   };
-in
-{
-
+in {
   imports = [
     inputs.zen-browser.homeModules.beta
   ];
-
-  home.username = "veltair";
-  home.homeDirectory = "/home/veltair";
-  programs.git.enable = true;
-  home.stateVersion = "25.05";
-  programs.fish = {
-    enable = true;
-    interactiveShellInit = ''
-      set fish_greeting # Disable greeting
-      fish_config prompt choose arrow
-    '';
-    shellInit = ''
-      fastfetch --logo ~/Pictures/nixos.png --logo-height 20 --logo-width 40
-    '';
-    shellAliases = {
-      fetch = "fastfetch --logo ~/Pictures/nixos.png --logo-height 20 --logo-width 40";
-      ".." = "cd ..";
-      "..." = "cd ../..";
-      gst = "git status";
-      ga = "git add";
-      gaa = "git add *";
-      gc = "git commit";
-      gcm = "git commit -m";
-      gp = "git push";
-      lg = "lazygit";
-      nv = "nvim";
-    };
-    plugins = [
-      # Enable a plugin (here grc for colorized command output) from nixpkgs
-      { name = "grc"; src = pkgs.fishPlugins.grc.src; }
-    ];
+  home = {
+    username = "veltair";
+    homeDirectory = "/home/veltair";
+    stateVersion = "25.05";
   };
-  programs.ghostty.enableFishIntegration = true;
-  programs.eza.enable = true;
-  programs.eza.colors = "always";
-  programs.eza.icons = "always";
-  programs.eza.enableFishIntegration = true;
-  programs.fzf.enable = true;
-  programs.fzf.enableFishIntegration = true;
-  programs.starship.enable = true;
-  programs.starship.enableFishIntegration = true;
-  programs.starship.enableTransience = true;
+  programs = {
+    git = {
+      enable = true;
+      settings.user.name = "Fabian Quevedo";
+      settings.user.email = "fabian.quevedo@upch.pe";
+    };
+    fish = {
+      enable = true;
+      interactiveShellInit = ''
+        set fish_greeting # Disable greeting
+        fish_config prompt choose arrow
+      '';
+      shellInit = ''
+        fastfetch --logo ~/Pictures/nixos.png --logo-height 20 --logo-width 40
+      '';
+      shellAliases = {
+        fetch = "fastfetch --logo ~/Pictures/nixos.png --logo-height 20 --logo-width 40";
+        ".." = "cd ..";
+        "..." = "cd ../..";
+        gst = "git status";
+        ga = "git add";
+        gaa = "git add *";
+        gc = "git commit";
+        gcm = "git commit -m";
+        gp = "git push";
+        lg = "lazygit";
+        nv = "nvim";
+      };
+      plugins = [
+        # Enable a plugin (here grc for colorized command output) from nixpkgs
+        {
+          name = "grc";
+          src = pkgs.fishPlugins.grc.src;
+        }
+      ];
+    };
+    ghostty.enableFishIntegration = true;
+    eza = {
+      enable = true;
+      colors = "always";
+      icons = "always";
+      enableFishIntegration = true;
+    };
+    fzf = {
+      enable = true;
+      enableFishIntegration = true;
+    };
+    starship = {
+      enable = true;
+      enableFishIntegration = true;
+      enableTransience = true;
+    };
+    lazygit.enable = true;
+    bat.enable = true;
+    zen-browser = {
+      enable = true;
+      #  profiles = {
+      #   profile = {
+      # bookmarks, extensions, search engines...
+      #  };
+      #};
+    };
+    mangohud = {
+      enable = true;
+      settings = {
+        full = true;
+      };
+    };
+    neovide = {
+      enable = true;
+      settings = {};
+    };
+    zed-editor = {
+      enable = true;
+      extensions = ["nix" "toml" "rust"];
+      userSettings = {
+        hour_format = "hour24";
+        vim_mode = true;
+      };
+    };
+  };
   home.packages = with pkgs; [
+    # Development
     ripgrep
     nil
     nixpkgs-fmt
     nodejs
     gcc
     fastfetch
+    btop
+    nvtopPackages.amd
+    wl-clipboard
+    lazygit
+    bat
+    mesa-demos
+    openrgb-with-all-plugins
+    # Gaming & Related
     protonup-qt
     heroic
     nixpkgs-unstable.osu-lazer-bin
-    chromium
     stable.virtualbox
-    solaar
-    neovide
-    anki
-    obsidian
-    firefox
-    mediawriter
-    kdePackages.partitionmanager
-    btop
-    nvtopPackages.amd
-    corectrl
-    ghostty
     desmume
     goverlay
     mangohud
-    libreoffice-fresh
     stable.mgba
+    joystickwake
+    etterna
+    corectrl
+    winetricks
+
+    # GUI Applications
+    chromium
+    firefox
+    neovide
+    anki
+    obsidian
+    mediawriter
+    kdePackages.partitionmanager
+    kdePackages.kate
     obs-studio
     opentabletdriver
     spotify
     upscayl
     zoom-us
-    wl-clipboard
-    kdePackages.kate
-    swayidle
     nautilus
     localsend
     syncthing
-    lazygit
-    bat
-    #gaming
-    mesa-demos
-    joystickwake
-    winetricks
-    openrgb-with-all-plugins
-    etterna
-
-    fishPlugins.grc
-    grc
-    eza
-    fzf
-    starship
-
+    libreoffice-fresh
+    solaar
+    ghostty
+    swayidle
   ];
-  programs.zen-browser = {
-    enable = true;
-    #  profiles = {
-    #   profile = {
-    # bookmarks, extensions, search engines...
-    #  };
-    #};
-  };
-
-  programs.mangohud = {
-    enable = true;
-    settings = {
-
-      full = true;
-    };
-  };
-
-  programs.neovide = {
-    enable = true;
-    settings = { };
-  };
-
-  programs = {
-    zed-editor = {
-        enable = true;
-        extensions = [ "nix" "toml" "rust" ];
-        userSettings = {
-          theme = {
-            mode = "system";
-            dark = "One Dark";
-            light = "One Light";
-          };
-          hour_format = "hour24";
-          vim_mode = true;
-    };
-    };
-  };
-
-  programs.git = {
-    settings.user.name = "Fabian Quevedo";
-    settings.user.email = "fabian.quevedo@upch.pe";
-  };
-
+  #Dotfiles symlinks
   xdg.configFile =
-
     builtins.mapAttrs
-      (name: subpath: {
-        source = create_symlink "${dotfiles}/${subpath}";
-        recursive = true;
-      })
-      configs;
+    (name: subpath: {
+      source = create_symlink "${dotfiles}/${subpath}";
+      recursive = true;
+    })
+    configs;
 
   xdg.desktopEntries = {
     osu-gamescope = {
@@ -170,7 +169,7 @@ in
       genericName = "osu!";
       exec = "steam-run gamemoderun gamescope -h 1080 -w 1920 -b -r 144 -- osu! %U";
       terminal = false;
-      categories = [ "Game" ];
+      categories = ["Game"];
       #mimeType = [ "text/html" "text/xml" ];
     };
     citron = {
@@ -178,12 +177,13 @@ in
       genericName = "Citron";
       exec = "/home/veltair/Downloads/citron_0.8.0-x86_64.AppImage %U";
       terminal = false;
-      categories = [ "Game" ];
+      categories = ["Game"];
       icon = "/home/veltair/Downloads/25f6ab48f6e60b601deb89e52ecabe18.png";
       #mimeType = [ "text/html" "text/xml" ];
     };
-
   };
+
+  #Theming
   gtk = {
     enable = true;
     theme = {
@@ -222,19 +222,16 @@ in
     size = 30;
     x11.enable = true;
   };
+  stylix.targets = {
+    bat.enable = true;
+    fzf.enable = true;
+    nixos-icons.enable = true;
+    btop.enable = true;
+    zed.enable = true;
+  };
 
-  stylix.targets.bat.enable = true;
-  stylix.targets.btop.enable = true;
-  #stylix.targets.vesktop.enable
-  #stylix.targets.vencord.enable
-  #stylix.targets.vencord.extraCss
-  stylix.targets.fzf.enable = true;
-  stylix.targets.nixos-icons.enable = true;
-  #stylix.targets.spicetify.enable
-  #stylix.targets.starship.enable
-  #stylix.targets.zed.enable
-  #stylix.targets.zen-browser.enable = true;
-  #stylix.targets.zen-browser.profileNames = [ "profile" ];
-
-
+  #targets.spicetify.enable
+  #targets.starship.enable
+  #targets.zen-browser.enable = true;
+  #targets.zen-browser.profileNames = [ "profile" ];
 }

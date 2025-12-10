@@ -26,6 +26,9 @@
 
   programs = {
     fish.enable = true;
+    xwayland.enable = true;
+    nix-ld.enable = true;
+
     firefox = {
       enable = true;
       preferences."media.eme.enabled" = true;
@@ -33,69 +36,102 @@
     corectrl.enable = true;
     obs-studio.enable = true;
     zoom-us.enable = true;
-    xwayland.enable = true;
-    appimage = {
-      enable = false;
-      binfmt = false;
+    thunar = {
+      enable = true;
+      plugins = with pkgs.xfce; [
+        thunar-archive-plugin
+        thunar-volman
+      ];
     };
-    nix-ld.enable = true;
+
+    #appimage = {
+    #  enable = false;
+    #  binfmt = false;
+    #};
     nh = {
       enable = true;
       flake = "/home/veltair/nixos-dotfiles/"; # path to config dir
     };
   };
 
+  stylix = {
+    enable = true;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/rose-pine.yaml";
+    autoEnable = false;
+    targets.chromium.enable = true;
+  };
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
   ];
 
   environment.systemPackages = with pkgs; [
+    # Core Utilities & Development
     vim
     wget
     git
     alacritty
+    cmake
+    cmakeMinimal
+    gh
+    killall
+    direnv
+    nh
+    clang-tools
+    grc
+
+    # File System & Hardware Tools
     linuxKernel.packages.linux_6_12.hid-tmff2
     exfatprogs
     pciutils
     usbutils
+    ntfs3g
+    gparted
+    # Added missing Thunar plugins:
+    xfce.thunar-archive-plugin
+    xfce.thunar-volman
+
+    # Graphics & Multimedia Libraries/Codecs
     libva-utils
     ffmpeg
     ffmpegthumbnailer
+    openh264
+    libjpeg
+    webp-pixbuf-loader
+
+    # Desktop & Image Utilities
     xwayland-satellite
-    ntfs3g
-    cmake
-    cmakeMinimal
     polkit_gnome
     polkit
-    libsForQt5.polkit-qt
-    gh
-    killall
-    libsForQt5.qt5.qtimageformats
-    kdePackages.okular
-    kdePackages.dolphin
-    kdePackages.spectacle
-    libsForQt5.qt5.qtsvg
-    libjpeg
     imv
     bign-handheld-thumbnailer
     feh
-    webp-pixbuf-loader
+
+    # KDE/Qt Tools
+    libsForQt5.polkit-qt
+    libsForQt5.qt5.qtimageformats
+    libsForQt5.qt5.qtsvg
+    kdePackages.okular
+    kdePackages.dolphin
+    kdePackages.spectacle
+    kdePackages.breeze
+    kdePackages.qt6ct
+
+    # Theming Packages (GTK/Qt)
     papirus-icon-theme
     kdePackages.breeze-icons
     rose-pine-cursor
     rose-pine-icon-theme
     libsForQt5.qtstyleplugins
-    kdePackages.breeze
     gtk2
     rose-pine-kvantum
     libsForQt5.qtstyleplugin-kvantum
     libsForQt5.qt5ct
-    kdePackages.qt6ct
-    gparted
-    nh
+    vimPlugins.rose-pine
+    vimPlugins.obsidian-nvim
+
+    # Gaming & Applications
     gamescope
     wineWowPackages.stable
-    clang-tools
     pinta
     faugus-launcher
     spicetify-cli
@@ -104,8 +140,16 @@
     nicotine-plus
     sleek-todo
     fasole
-    openh264
-    direnv
+
+    # Shell/CLI Tools
+    fastfetch # Removed duplicate fastfetch
+
+    # Neovim required packages
+    luajitPackages.luarocks
+    lua51Packages.lua
+    tree-sitter
+    lua-language-server
+    fd
 
     # Compression
     arj
@@ -128,49 +172,5 @@
     xz
     zip
     zstd
-
-    fastfetch
-
-    #Neovim required packages
-    luajitPackages.luarocks
-    lua51Packages.lua
-    tree-sitter
-    lua-language-server
-    fd
   ];
-
-  services.flatpak = {
-    remotes = [
-      {
-        name = "flathub";
-        location = "https://dl.flathub.org/repo/";
-      }
-    ];
-    packages = [
-      "com.discordapp.Discord"
-      "com.stremio.Stremio"
-      "com.usebottles.bottles"
-      "org.dupot.easyflatpak"
-      "org.freedesktop.Platform.VulkanLayer.gamescope/x86_64/24.08"
-      "org.winehq.Wine.gecko/x86_64/stable-24.08"
-      "org.winehq.Wine.gecko/x86_64/stable-25.08"
-      "org.winehq.Wine.mono/x86_64/stable-24.08"
-      "org.winehq.Wine.mono/x86_64/stable-25.08"
-    ];
-    update.onActivation = true;
-  };
-
-  programs.thunar = {
-    enable = true;
-    plugins = with pkgs.xfce; [
-      thunar-archive-plugin
-      thunar-volman
-    ];
-  };
-
-  stylix.enable = true;
-
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/rose-pine.yaml";
-  stylix.autoEnable = false;
-  stylix.targets.chromium.enable = true;
 }

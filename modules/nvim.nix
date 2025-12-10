@@ -135,7 +135,16 @@
             enable = true;
           };
         };
-        extraPlugins = with pkgs.vimPlugins; {};
+        extraPlugins = with pkgs.vimPlugins; {
+          rose-pine = {
+            package = rose-pine;
+            setup = "require('rose-pine').setup {}";
+          };
+          obsidian-nvim = {
+            package = obsidian-nvim;
+            setup = "require('obsidian-nvim').setup {}";
+          };
+        };
         filetree = {
           neo-tree = {
             enable = true;
@@ -247,7 +256,87 @@
           enable = true;
           extraSpellWords = {
             "en.utf-8" = ["nvf" "word_you_want_to_add"];
+            languages = ["en" "de" "es"];
           };
+        };
+        statusline = {
+          lualine = {
+            enable = true;
+          };
+        };
+        syntaxHighlighting = true;
+        telescope = {
+          enable = true;
+          extensions = [
+            {
+              name = "fzf";
+              packages = [pkgs.vimPlugins.telescope-fzf-native-nvim];
+              setup = {fzf = {fuzzy = true;};};
+            }
+          ];
+          mappings = {
+            buffers = "<leader>fb";
+            diagnostics = "<leader>fld";
+            findFiles = "<leader>ff";
+            findProjects = "<leader>fp";
+            liveGrep = "<leader>fg";
+            open = "<leader>ft";
+          };
+          setupOpts = {
+            defaults = {
+              color_devicons = true;
+            };
+          };
+        };
+        terminal.toggleterm = {
+          enable = true;
+          lazygit.enable = true;
+          mappings.open = "<c-t>";
+        };
+        theme = {
+          enable = true;
+          name = "rose-pine";
+          style = "main";
+          transparent = true;
+        };
+        treesitter = {
+          enable = true;
+          context.enable = true;
+          grammars = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
+            regex
+            kdl
+          ];
+          textobjects.enable = true;
+        };
+        ui = {
+          borders = {
+            enable = true;
+            plugins = {
+              which-key.enable = true;
+            };
+          };
+          colorizer.enable = true;
+        };
+        utility = {
+          direnv.enable = true;
+          images = {
+            image-nvim = {
+              enable = true;
+              setupOpts.backend = "kitty";
+            };
+            img-clip.enable = true;
+          };
+          multicursors.enable = true;
+          preview = {
+            glow.enable = true;
+            markdownPreview.enable = true;
+          };
+        };
+        visuals = {
+          highlight-undo.enable = true;
+          nvim-cursorline.enable = true;
+          nvim-web-devicons.enable = true;
+          tiny-devicons-auto-colors.enable = true;
         };
       };
     };
