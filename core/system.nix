@@ -6,7 +6,7 @@
   #host
 
   system.stateVersion = "25.05";
-
+  services.xserver.enable = true;
   time.timeZone = "America/Lima";
   i18n.defaultLocale = "en_US.UTF-8";
   console.keyMap = "us";

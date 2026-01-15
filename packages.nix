@@ -25,6 +25,16 @@
   ];
 
   programs = {
+    bash = {
+      interactiveShellInit = ''
+        if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
+        then
+          shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
+          exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
+        fi
+      '';
+    };
+
     fish.enable = true;
     xwayland.enable = true;
     nix-ld.enable = true;
@@ -38,7 +48,7 @@
     zoom-us.enable = true;
     thunar = {
       enable = true;
-      plugins = with pkgs.xfce; [
+      plugins = with pkgs; [
         thunar-archive-plugin
         thunar-volman
       ];
@@ -52,7 +62,11 @@
       enable = true;
       flake = "/home/veltair/nixos-dotfiles/"; # path to config dir
     };
+    gpu-screen-recorder.enable = true;
+    mango.enable = true;
   };
+
+  services.mullvad-vpn.enable = true;
 
   stylix = {
     enable = true;
@@ -87,8 +101,8 @@
     ntfs3g
     gparted
     # Added missing Thunar plugins:
-    xfce.thunar-archive-plugin
-    xfce.thunar-volman
+    thunar-archive-plugin
+    thunar-volman
 
     # Graphics & Multimedia Libraries/Codecs
     libva-utils
@@ -97,6 +111,7 @@
     openh264
     libjpeg
     webp-pixbuf-loader
+    gpu-screen-recorder
 
     # Desktop & Image Utilities
     xwayland-satellite
@@ -127,7 +142,6 @@
     libsForQt5.qtstyleplugin-kvantum
     libsForQt5.qt5ct
     vimPlugins.rose-pine
-    vimPlugins.obsidian-nvim
 
     # Gaming & Applications
     gamescope
@@ -135,11 +149,29 @@
     pinta
     faugus-launcher
     spicetify-cli
-    vesktop
+    vesktop #TODO 03/01/26 package broken
     vlc
     nicotine-plus
-    sleek-todo
     fasole
+    nexusmods-app-unfree
+    mullvad-vpn
+    krita
+    qalculate-qt
+
+    # Mango dependencies
+    glibc
+    libinput
+    libdrm
+    libxkbcommon
+    pixman
+    meson
+    ninja
+    libdisplay-info
+    libliftoff
+    hwdata
+    seatd
+    pcre2
+    libxcb
 
     # Shell/CLI Tools
     fastfetch # Removed duplicate fastfetch
@@ -158,7 +190,7 @@
     cpio
     gnutar
     gzip
-    lha
+    stable.lha #TODO 02/26 package broken try to fix soon
     libarchive
     lrzip
     lz4

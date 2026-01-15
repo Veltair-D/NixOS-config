@@ -1,9 +1,6 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   nix = {
+    package = pkgs.nixVersions.latest;
     optimise = {
       automatic = true;
       dates = ["weekly"];

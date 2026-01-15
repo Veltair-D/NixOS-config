@@ -19,6 +19,7 @@
     tumbler.enable = true;
   };
   programs.niri.enable = true;
+  security.polkit.enable = true; # polkit
 
   systemd.user.services.polkit-gnome-authentication-agent-1 = {
     description = "polkit-gnome-authentication-agent-1";
@@ -32,5 +33,8 @@
       RestartSec = 1;
       TimeoutStopSec = 10;
     };
+  };
+  xdg.portal = {
+    enable = true;
   };
 }

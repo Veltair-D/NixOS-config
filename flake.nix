@@ -16,7 +16,6 @@
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.quickshell.follows = "quickshell"; # Use same quickshell version
     };
     stylix = {
       url = "github:nix-community/stylix";
@@ -29,10 +28,13 @@
     nix-flatpak = {
       url = "github:gmodena/nix-flatpak/?ref=latest";
     };
-    #obsidian-nvim.url = "github:epwalsh/obsidian.nvim";
 
     nvf = {
       url = "github:NotAShelf/nvf/v0.8";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    mango = {
+      url = "github:DreamMaoMao/mango";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -43,6 +45,8 @@
     home-manager,
     stylix,
     nix-flatpak,
+    mango,
+    nvf,
     ...
   }: let
     system = "x86_64-linux";
@@ -65,9 +69,13 @@
         ##Users and packages
         ./packages.nix
         ./users/veltair.nix
+        mango.nixosModules.mango
+        {
+          programs.mango.enable = true;
+        }
 
         nix-flatpak.nixosModules.nix-flatpak
-        inputs.nvf.nixosModules.default
+        nvf.nixosModules.default
         home-manager.nixosModules.home-manager
         {
           home-manager = {
@@ -80,11 +88,6 @@
           };
         }
       ];
-      #              specialArgs = { inherit inputs system; };
     };
   };
 }
-#     homeConfigurations.veltair = home-manager.lib.homeManagerConfiguration {
-# modules = [ ./home.nix ];};
-# };
-

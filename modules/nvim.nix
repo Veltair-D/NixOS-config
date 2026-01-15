@@ -1,6 +1,5 @@
 {
   pkgs,
-  inputs,
   lib,
   ...
 }: {
@@ -32,6 +31,8 @@
             enable = true;
             cHeader = true;
             lsp.enable = true;
+            lsp.servers = ["ccls"];
+            #lsp.server = "clangd";
             treesitter.enable = true;
           };
           lua = {
@@ -65,7 +66,7 @@
           };
           rust = {
             enable = true;
-            crates.enable = true;
+            extensions.crates-nvim.enable = true;
             format.enable = true;
             lsp.enable = true;
             treesitter.enable = true;
@@ -140,10 +141,6 @@
             package = rose-pine;
             setup = "require('rose-pine').setup {}";
           };
-          obsidian-nvim = {
-            package = obsidian-nvim;
-            setup = "require('obsidian-nvim').setup {}";
-          };
         };
         filetree = {
           neo-tree = {
@@ -211,13 +208,6 @@
         lazy = {
           enable = true;
           #Plugins to lazy load
-          plugins = {
-            rose-pine = {
-              enabled = true;
-              package = "rose-pine";
-              colorscheme = "rose-pine";
-            };
-          };
         };
         luaPackages = [
           "magick"
@@ -235,7 +225,6 @@
           };
         };
         notes = {
-          obsidian.enable = true;
           todo-comments = {
             enable = true;
             mappings = {
@@ -336,7 +325,7 @@
           highlight-undo.enable = true;
           nvim-cursorline.enable = true;
           nvim-web-devicons.enable = true;
-          tiny-devicons-auto-colors.enable = true;
+          tiny-devicons-auto-colors.enable = false;
         };
       };
     };

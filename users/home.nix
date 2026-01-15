@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  lib,
   inputs,
   ...
 }: let
@@ -16,6 +15,7 @@
 in {
   imports = [
     inputs.zen-browser.homeModules.beta
+    inputs.mango.hmModules.mango
   ];
   home = {
     username = "veltair";
@@ -30,6 +30,7 @@ in {
     };
     fish = {
       enable = true;
+      #package = pkgs.stable.fish;
       interactiveShellInit = ''
         set fish_greeting # Disable greeting
         fish_config prompt choose arrow
@@ -49,6 +50,9 @@ in {
         gp = "git push";
         lg = "lazygit";
         nv = "nvim";
+        cppqb = "clang++ project.cpp && ./a.out";
+        nru = "nh os switch --update";
+        nrs = "nh os switch";
       };
       plugins = [
         # Enable a plugin (here grc for colorized command output) from nixpkgs
@@ -96,12 +100,35 @@ in {
     };
     zed-editor = {
       enable = true;
+      package = pkgs.stable.zed-editor;
       extensions = ["nix" "toml" "rust"];
       userSettings = {
         hour_format = "hour24";
         vim_mode = true;
       };
     };
+    obs-studio = {
+      enable = true;
+      plugins = with pkgs.obs-studio-plugins; [
+        wlrobs
+        waveform
+        obs-vkcapture
+        obs-stroke-glow-shadow
+        obs-source-switcher
+        obs-source-record
+        obs-pipewire-audio-capture
+        obs-noise
+      ];
+    };
+  };
+  wayland.windowManager.mango = {
+    enable = true;
+    settings = ''
+    '';
+    autostart_sh = ''
+       # see autostart.sh
+      # Note: here no need to add shebang
+    '';
   };
   home.packages = with pkgs; [
     # Development
@@ -141,7 +168,6 @@ in {
     mediawriter
     kdePackages.partitionmanager
     kdePackages.kate
-    obs-studio
     opentabletdriver
     spotify
     upscayl
