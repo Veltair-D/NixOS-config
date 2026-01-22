@@ -120,6 +120,12 @@
     imv
     bign-handheld-thumbnailer
     feh
+    xdg-user-dirs
+    slurp
+    grim
+    wl-clip-persist
+    cliphist
+    wl-clipboard
 
     # KDE/Qt Tools
     libsForQt5.polkit-qt
@@ -153,25 +159,11 @@
     vlc
     nicotine-plus
     fasole
-    nexusmods-app-unfree
     mullvad-vpn
     krita
     qalculate-qt
 
     # Mango dependencies
-    glibc
-    libinput
-    libdrm
-    libxkbcommon
-    pixman
-    meson
-    ninja
-    libdisplay-info
-    libliftoff
-    hwdata
-    seatd
-    pcre2
-    libxcb
 
     # Shell/CLI Tools
     fastfetch # Removed duplicate fastfetch

@@ -79,6 +79,7 @@ in {
           ];
         };
         opentabletdriver.enable = true;
+        uinput.enable = true;
         opentabletdriver.daemon.enable = true;
         steam-hardware.enable = true;
         xpadneo.enable = true;

@@ -56,6 +56,7 @@
           "boot.shell_on_fail"
           "udev.log_priority=3"
           "rd.systemd.show_status=auto"
+          "uinput"
         ];
 
     kernel.sysctl = {
@@ -81,7 +82,6 @@
 
   environment.sessionVariables = {
     STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
-    DISPLAY = ":0";
   };
   zramSwap = {
     enable = true;

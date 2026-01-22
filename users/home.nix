@@ -11,6 +11,7 @@
     niri = "niri";
     noctalia = "noctalia";
     ghostty = "ghostty";
+    mango = "mango";
   };
 in {
   imports = [
@@ -123,12 +124,6 @@ in {
   };
   wayland.windowManager.mango = {
     enable = true;
-    settings = ''
-    '';
-    autostart_sh = ''
-       # see autostart.sh
-      # Note: here no need to add shebang
-    '';
   };
   home.packages = with pkgs; [
     # Development
