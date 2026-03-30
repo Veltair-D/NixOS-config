@@ -45,19 +45,32 @@
     kernelPackages = pkgs.linuxPackages_xanmod_latest;
     supportedFilesystems = ["ntfs"];
     tmp.cleanOnBoot = true;
+
     kernelParams =
       if builtins.elem "kvm-amd" config.boot.kernelModules
       then ["amd_pstate=active" "nosplit_lock_mitigate" "clearcpuid=514"]
-      else
-        ["nosplit_lock_mitigate" "quiet" "splash"]
-        [
-          "quiet"
-          "splash"
-          "boot.shell_on_fail"
-          "udev.log_priority=3"
-          "rd.systemd.show_status=auto"
-          "uinput"
-        ];
+      else [
+        "nosplit_lock_mitigate"
+        "quiet"
+        "splash"
+        "boot.shell_on_fail"
+        "udev.log_priority=3"
+        "rd.systemd.show_status=auto"
+        "uinput"
+      ];
+    # kernelParams =
+    #   if builtins.elem "kvm-amd" config.boot.kernelModules
+    #   then ["amd_pstate=active" "nosplit_lock_mitigate" "clearcpuid=514"]
+    #   else
+    #     ["nosplit_lock_mitigate" "quiet" "splash"]
+    #     [
+    #       "quiet"
+    #       "splash"
+    #       "boot.shell_on_fail"
+    #       "udev.log_priority=3"
+    #       "rd.systemd.show_status=auto"
+    #       "uinput"
+    #     ];
 
     kernel.sysctl = {
       "kernel.split_lock_mitigate" = 0;
@@ -82,6 +95,7 @@
 
   environment.sessionVariables = {
     STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
+    STEAM_USE_NIX_FONTS = "1";
   };
   zramSwap = {
     enable = true;

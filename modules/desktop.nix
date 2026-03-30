@@ -13,7 +13,10 @@
         variant = "alt-intl";
       };
     };
-    displayManager.ly.enable = true;
+    displayManager.ly = {
+      enable = true;
+      package = pkgs.small.ly;
+    };
     #Thumbnails
     gvfs.enable = true;
     tumbler.enable = true;

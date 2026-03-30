@@ -5,61 +5,48 @@
 
 {
   imports =
-    [
-      (modulesPath + "/installer/scan/not-detected.nix")
+    [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
+  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-amd" ];
+  boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    {
-      device = "/dev/disk/by-uuid/c611fbef-259c-4ca0-b2dc-7399431426a2";
+    { device = "/dev/disk/by-uuid/c611fbef-259c-4ca0-b2dc-7399431426a2";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    {
-      device = "/dev/disk/by-uuid/4925-E88D";
+    { device = "/dev/disk/by-uuid/4925-E88D";
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
-  fileSystems."/media/games-1" =
-    {
-      device = "/dev/disk/by-uuid/51053240-8eb4-490c-a5d2-61fc2e9b0ad8";
-      fsType = "ext4";
-    };
-  fileSystems."/media/games-2" =
-    {
-      device = "/dev/disk/by-uuid/442572cb-ec14-417b-a8e0-10bd0e102777";
-      fsType = "ext4";
-    };
   fileSystems."/media/games-3" =
-    {
-      device = "/dev/disk/by-uuid/683804b7-dd71-4b35-b21b-82236f2ee615";
+    { device = "/dev/disk/by-uuid/683804b7-dd71-4b35-b21b-82236f2ee615";
       fsType = "ext4";
     };
-  fileSystems."/media/games-4" =
-    {
-      device = "/dev/disk/by-uuid/f997ae01-6689-482f-9543-621fef8c026f";
-      fsType = "ext4";
-    };
-  # fileSystems."/media/CachyOS" =
-  #   {
-  #     device = "/dev/";
-  #     fsType = "btrfs";
-  #   };
-  swapDevices = [ ];
 
-  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
-  # (the default) this is the recommended approach. When using systemd-networkd it's
-  # still possible to use this option, but it's recommended to use it in conjunction
-  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
-  networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp6s0.useDHCP = lib.mkDefault true;
+  fileSystems."/media/games-1" =
+    { device = "/dev/disk/by-uuid/51053240-8eb4-490c-a5d2-61fc2e9b0ad8";
+      fsType = "ext4";
+    };
+
+  fileSystems."/media/games-2" =
+    { device = "/dev/disk/by-uuid/442572cb-ec14-417b-a8e0-10bd0e102777";
+      fsType = "ext4";
+    };
+
+  fileSystems."/media/games-4" =
+    { device = "/dev/disk/by-uuid/f997ae01-6689-482f-9543-621fef8c026f";
+      fsType = "ext4";
+    };
+
+  swapDevices =
+    [ { device = "/dev/disk/by-uuid/800024bf-4e78-4397-9eac-59fdb997cb7a"; }
+    ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

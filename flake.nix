@@ -5,6 +5,7 @@
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixos-unstable-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -30,11 +31,11 @@
     };
 
     nvf = {
-      url = "github:NotAShelf/nvf/v0.8";
+      url = "github:NotAShelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     mango = {
-      url = "github:DreamMaoMao/mango";
+      url = "github:WeraPea/mangowc";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

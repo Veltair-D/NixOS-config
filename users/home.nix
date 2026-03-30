@@ -52,7 +52,7 @@ in {
         lg = "lazygit";
         nv = "nvim";
         cppqb = "clang++ project.cpp && ./a.out";
-        nru = "nh os switch --update";
+        nru = "nh os switch --update && flatpak update";
         nrs = "nh os switch";
       };
       plugins = [
@@ -83,11 +83,11 @@ in {
     bat.enable = true;
     zen-browser = {
       enable = true;
-      #  profiles = {
-      #   profile = {
-      # bookmarks, extensions, search engines...
-      #  };
-      #};
+      profiles = {
+        Veltair = {
+          #bookmarks, extensions, search engines...
+        };
+      };
     };
     mangohud = {
       enable = true;
@@ -142,7 +142,6 @@ in {
     openrgb-with-all-plugins
     # Gaming & Related
     protonup-qt
-    heroic
     nixpkgs-unstable.osu-lazer-bin
     stable.virtualbox
     desmume
@@ -181,6 +180,7 @@ in {
     (name: subpath: {
       source = create_symlink "${dotfiles}/${subpath}";
       recursive = true;
+      force = true;
     })
     configs;
 
@@ -205,37 +205,29 @@ in {
   };
 
   #Theming
-  gtk = {
-    enable = true;
-    theme = {
-      package = pkgs.rose-pine-gtk-theme;
-      name = "rose-pine";
-    };
-    iconTheme = {
-      package = pkgs.rose-pine-icon-theme;
-      name = "rose-pine";
-    };
-    gtk2 = {
-      enable = true;
-      cursorTheme = {
-        package = pkgs.rose-pine-cursor;
-        name = "BreezeX-RosePine-Linux";
-        size = 30;
-      };
-      iconTheme = {
-        package = pkgs.rose-pine-icon-theme;
-        name = "rose-pine";
-      };
-    };
-  };
-  qt = {
-    enable = true;
-    platformTheme.name = "gtk2";
-    style = {
-      package = pkgs.libsForQt5.qtstyleplugins;
-      name = "gtk2";
-    };
-  };
+  #  gtk = {
+  #    enable = true;
+  #    theme = {
+  #      package = pkgs.rose-pine-gtk-theme;
+  #      name = "rose-pine";
+  #    };
+  #    iconTheme = {
+  #      package = pkgs.rose-pine-icon-theme;
+  #      name = "rose-pine";
+  #    };
+  #    gtk2 = {
+  #      enable = true;
+  #      cursorTheme = {
+  #        package = pkgs.rose-pine-cursor;
+  #        name = "BreezeX-RosePine-Linux";
+  #        size = 30;
+  #      };
+  #      iconTheme = {
+  #        package = pkgs.rose-pine-icon-theme;
+  #        name = "rose-pine";
+  #      };
+  #    };
+  #  };
   home.pointerCursor = {
     enable = true;
     name = "BreezeX-RosePine-Linux";
@@ -249,10 +241,25 @@ in {
     nixos-icons.enable = true;
     btop.enable = true;
     zed.enable = true;
+    zen-browser.enable = true;
+    zen-browser.profileNames = ["Veltair"];
+    cava.enable = true;
+    cava.colors.enable = true;
+    alacritty.enable = true;
+    anki.enable = true;
+    vesktop.enable = true;
+    fish.enable = true;
+    ghostty.enable = true;
+    gtk.enable = true;
+    lazygit.enable = true;
+    neovide.enable = true;
+    nvf.enable = true;
+    noctalia-shell.enable = true;
+    obsidian.enable = true;
+    qt.enable = true;
+    starship.enable = true;
   };
 
   #targets.spicetify.enable
   #targets.starship.enable
-  #targets.zen-browser.enable = true;
-  #targets.zen-browser.profileNames = [ "profile" ];
 }

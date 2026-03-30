@@ -282,12 +282,12 @@
           lazygit.enable = true;
           mappings.open = "<c-t>";
         };
-        theme = {
-          enable = true;
-          name = "rose-pine";
-          style = "main";
-          transparent = true;
-        };
+        # theme = {
+        #   enable = true;
+        #   name = "rose-pine";
+        #   style = "main";
+        #   transparent = true;
+        # };
         treesitter = {
           enable = true;
           context.enable = true;

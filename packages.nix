@@ -21,6 +21,10 @@
         system = prev.stdenv.hostPlatform.system;
         config.allowUnfree = true;
       };
+      small = import inputs.nixos-unstable-small {
+        system = prev.stdenv.hostPlatform.system;
+        config.allowUnfree = true;
+      };
     })
   ];
 
@@ -53,6 +57,7 @@
         thunar-volman
       ];
     };
+    java.enable = true;
 
     #appimage = {
     #  enable = false;
@@ -67,12 +72,24 @@
   };
 
   services.mullvad-vpn.enable = true;
+  services.sunshine = {
+    enable = true;
+  };
 
   stylix = {
     enable = true;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/rose-pine.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/dracula.yaml";
     autoEnable = false;
-    targets.chromium.enable = true;
+    targets = {
+      chromium.enable = true;
+      fish.enable = true;
+      gtk.enable = true;
+      nvf.enable = true;
+      nixos-icons.enable = true;
+      plymouth.enable = true;
+      qt.enable = true;
+      grub.enable = true;
+    };
   };
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
@@ -126,6 +143,7 @@
     wl-clip-persist
     cliphist
     wl-clipboard
+    sway-audio-idle-inhibit
 
     # KDE/Qt Tools
     libsForQt5.polkit-qt
@@ -151,7 +169,8 @@
 
     # Gaming & Applications
     gamescope
-    wineWowPackages.stable
+    stable.wineWow64Packages.stable
+    heroic
     pinta
     faugus-launcher
     spicetify-cli
@@ -162,6 +181,8 @@
     mullvad-vpn
     krita
     qalculate-qt
+    sunshine
+    prismlauncher
 
     # Mango dependencies
 
